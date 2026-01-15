@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full bg-linear-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden flex flex-col">
+  <div class="flex h-full flex-col overflow-hidden bg-linear-to-br from-slate-50 via-blue-50 to-indigo-100">
     <!-- 顶部标题栏 -->
     <div class="bg-white py-2">
       <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -32,19 +32,19 @@
       </div>
     </div>
 
-    <div class="w-full px-4 sm:px-6 lg:px-8 py-3 lg:py-4 space-y-3 lg:space-y-4 flex-1 overflow-y-hidden">
+    <div class="w-full flex-1 space-y-3 overflow-y-hidden px-4 py-3 sm:px-6 lg:space-y-4 lg:px-8 lg:py-4">
       <!-- 统计卡片区域 -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-2 lg:gap-3">
+      <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-3 xl:grid-cols-4">
         <!-- 计数器卡片 -->
-        <div class="bg-white rounded-xl shadow-md p-3 lg:p-4 hover:shadow-lg transition">
+        <div class="rounded-xl bg-white p-3 shadow-md transition hover:shadow-lg lg:p-4">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-gray-500 mb-1">计数器</p>
+              <p class="mb-1 text-sm text-gray-500">计数器</p>
               <p class="text-3xl font-bold text-indigo-600">{{ count }}</p>
             </div>
             <n-icon :component="Icons.Add" :size="32" class="text-indigo-400" />
           </div>
-          <div class="flex gap-2 mt-4">
+          <div class="mt-4 flex gap-2">
             <n-button size="small" @click="inc()" type="primary" ghost>
               <template #icon>
                 <n-icon :component="Icons.ArrowUpward" />
@@ -64,14 +64,14 @@
         </div>
 
         <!-- 用户信息卡片 -->
-        <div class="bg-white rounded-xl shadow-md p-3 lg:p-4 hover:shadow-lg transition">
+        <div class="rounded-xl bg-white p-3 shadow-md transition hover:shadow-lg lg:p-4">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-gray-500 mb-1">用户信息</p>
+              <p class="mb-1 text-sm text-gray-500">用户信息</p>
               <p class="text-lg font-semibold text-gray-800">
                 {{ userStore.isLoggedIn ? userStore.name : "未登录" }}
               </p>
-              <p class="text-xs text-gray-400 mt-1">
+              <p class="mt-1 text-xs text-gray-400">
                 {{ userStore.isLoggedIn ? userStore.email : "请先登录" }}
               </p>
             </div>
@@ -80,28 +80,28 @@
         </div>
 
         <!-- 防抖统计卡片 -->
-        <div class="bg-white rounded-xl shadow-md p-3 lg:p-4 hover:shadow-lg transition">
+        <div class="rounded-xl bg-white p-3 shadow-md transition hover:shadow-lg lg:p-4">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-gray-500 mb-1">防抖统计</p>
+              <p class="mb-1 text-sm text-gray-500">防抖统计</p>
               <p class="text-2xl font-bold text-purple-600">
                 {{ debounceExecCount }}
               </p>
-              <p class="text-xs text-gray-400 mt-1">点击: {{ clickCount }} 次</p>
+              <p class="mt-1 text-xs text-gray-400">点击: {{ clickCount }} 次</p>
             </div>
             <n-icon :component="Icons.FilterList" :size="32" class="text-purple-400" />
           </div>
         </div>
 
         <!-- 事件统计卡片 -->
-        <div class="bg-white rounded-xl shadow-md p-3 lg:p-4 hover:shadow-lg transition">
+        <div class="rounded-xl bg-white p-3 shadow-md transition hover:shadow-lg lg:p-4">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-gray-500 mb-1">事件消息</p>
+              <p class="mb-1 text-sm text-gray-500">事件消息</p>
               <p class="text-2xl font-bold text-green-600">
                 {{ eventMessages.length }}
               </p>
-              <p class="text-xs text-gray-400 mt-1">最新消息数</p>
+              <p class="mt-1 text-xs text-gray-400">最新消息数</p>
             </div>
             <n-icon :component="Icons.Notifications" :size="32" class="text-green-400" />
           </div>
@@ -109,20 +109,20 @@
       </div>
 
       <!-- 主要内容区域 -->
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-3 lg:gap-4 flex-1 min-h-0">
+      <div class="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-5 lg:gap-4">
         <!-- 左侧：功能演示 -->
-        <div class="lg:col-span-3 space-y-3 lg:space-y-4 flex flex-col min-h-0">
+        <div class="flex min-h-0 flex-col space-y-3 lg:col-span-3 lg:space-y-4">
           <!-- Context 功能演示 -->
-          <div class="bg-white rounded-xl shadow-md p-3 lg:p-4 flex-1 flex flex-col min-h-0">
-            <h2 class="text-base lg:text-lg font-semibold text-gray-700 mb-2 lg:mb-3 flex items-center gap-2">
+          <div class="flex min-h-0 flex-1 flex-col rounded-xl bg-white p-3 shadow-md lg:p-4">
+            <h2 class="mb-2 flex items-center gap-2 text-base font-semibold text-gray-700 lg:mb-3 lg:text-lg">
               <n-icon :component="Icons.Settings" :size="20" />
               Context 功能演示
             </h2>
 
-            <div class="flex-1 grid grid-cols-2 gap-3 lg:gap-4 min-h-0">
+            <div class="grid min-h-0 flex-1 grid-cols-2 gap-3 lg:gap-4">
               <!-- 消息提示 -->
               <div>
-                <h3 class="text-xs font-medium text-gray-600 mb-1.5">消息提示</h3>
+                <h3 class="mb-1.5 text-xs font-medium text-gray-600">消息提示</h3>
                 <div class="grid grid-cols-2 gap-1.5">
                   <n-button type="success" size="tiny" @click="handleSuccessMessage">
                     <template #icon>
@@ -159,7 +159,7 @@
 
               <!-- 通知 -->
               <div>
-                <h3 class="text-xs font-medium text-gray-600 mb-1.5">通知</h3>
+                <h3 class="mb-1.5 text-xs font-medium text-gray-600">通知</h3>
                 <div class="grid grid-cols-2 gap-1.5">
                   <n-button type="success" size="tiny" @click="handleSuccessNotify">
                     <template #icon>
@@ -190,7 +190,7 @@
 
               <!-- 对话框 -->
               <div>
-                <h3 class="text-xs font-medium text-gray-600 mb-1.5">对话框</h3>
+                <h3 class="mb-1.5 text-xs font-medium text-gray-600">对话框</h3>
                 <div class="grid grid-cols-2 gap-1.5">
                   <n-button type="warning" size="tiny" @click="handleConfirmDialog">
                     <template #icon>
@@ -221,7 +221,7 @@
 
               <!-- 加载条 -->
               <div>
-                <h3 class="text-xs font-medium text-gray-600 mb-1.5">加载条</h3>
+                <h3 class="mb-1.5 text-xs font-medium text-gray-600">加载条</h3>
                 <div class="grid grid-cols-2 gap-1.5">
                   <n-button type="primary" size="tiny" @click="handleStartLoading">
                     <template #icon>
@@ -253,8 +253,8 @@
           </div>
 
           <!-- 工具功能演示 -->
-          <div class="bg-white rounded-xl shadow-md p-3 lg:p-4">
-            <h2 class="text-base lg:text-lg font-semibold text-gray-700 mb-2 lg:mb-3 flex items-center gap-2">
+          <div class="rounded-xl bg-white p-3 shadow-md lg:p-4">
+            <h2 class="mb-2 flex items-center gap-2 text-base font-semibold text-gray-700 lg:mb-3 lg:text-lg">
               <n-icon :component="Icons.GridView" :size="20" />
               工具功能演示
             </h2>
@@ -262,7 +262,7 @@
             <div class="grid grid-cols-2 gap-3 lg:gap-4">
               <!-- 防抖演示 -->
               <div>
-                <h3 class="text-xs font-medium text-gray-600 mb-1.5">Lodash-es 防抖</h3>
+                <h3 class="mb-1.5 text-xs font-medium text-gray-600">Lodash-es 防抖</h3>
                 <div class="space-y-1.5">
                   <n-button type="primary" size="tiny" @click="handleDebounceClick" class="w-full">
                     <template #icon>
@@ -279,7 +279,7 @@
 
               <!-- 事件总线演示 -->
               <div>
-                <h3 class="text-xs font-medium text-gray-600 mb-1.5">Mitt 事件总线</h3>
+                <h3 class="mb-1.5 text-xs font-medium text-gray-600">Mitt 事件总线</h3>
                 <div class="space-y-1.5">
                   <div class="flex gap-1.5">
                     <n-button type="success" size="tiny" @click="handleEmitEvent" class="flex-1">
@@ -296,17 +296,17 @@
                   </div>
                   <div
                     v-if="eventMessages.length > 0"
-                    class="space-y-1 max-h-20 overflow-y-hidden bg-gray-50 rounded p-1.5"
+                    class="max-h-20 space-y-1 overflow-y-hidden rounded bg-gray-50 p-1.5"
                   >
                     <div
                       v-for="(msg, index) in eventMessages"
                       :key="index"
-                      class="bg-green-50 border border-green-200 rounded p-1 text-[10px] text-gray-700"
+                      class="rounded border border-green-200 bg-green-50 p-1 text-[10px] text-gray-700"
                     >
                       {{ msg }}
                     </div>
                   </div>
-                  <div v-else class="text-xs text-gray-400 text-center py-2">暂无消息</div>
+                  <div v-else class="py-2 text-center text-xs text-gray-400">暂无消息</div>
                 </div>
               </div>
             </div>
@@ -314,43 +314,43 @@
         </div>
 
         <!-- 右侧：图标和字体演示 -->
-        <div class="space-y-3 lg:space-y-4 flex flex-col min-h-0">
+        <div class="flex min-h-0 flex-col space-y-3 lg:space-y-4">
           <!-- 图标演示 -->
-          <div class="bg-white rounded-xl shadow-md p-3 lg:p-4 flex-1 flex flex-col min-h-0">
-            <h2 class="text-base lg:text-lg font-semibold text-gray-700 mb-2 lg:mb-3 flex items-center gap-2">
+          <div class="flex min-h-0 flex-1 flex-col rounded-xl bg-white p-3 shadow-md lg:p-4">
+            <h2 class="mb-2 flex items-center gap-2 text-base font-semibold text-gray-700 lg:mb-3 lg:text-lg">
               <n-icon :component="Icons.Palette" :size="20" />
               图标演示
             </h2>
-            <div class="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-3 xl:grid-cols-4 gap-1.5 lg:gap-2 flex-1">
+            <div class="grid flex-1 grid-cols-4 gap-1.5 sm:grid-cols-5 lg:grid-cols-3 lg:gap-2 xl:grid-cols-4">
               <div
                 v-for="(icon, index) in iconList"
                 :key="index"
-                class="flex flex-col items-center justify-center p-1.5 lg:p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer"
+                class="flex cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-50 p-1.5 transition hover:bg-gray-100 lg:p-2"
                 @click="handleIconClick(icon.name)"
               >
-                <n-icon :component="icon.component" :size="18" class="text-indigo-600 mb-0.5" />
-                <span class="text-[9px] lg:text-[10px] text-gray-600 text-center leading-tight">{{ icon.name }}</span>
+                <n-icon :component="icon.component" :size="18" class="mb-0.5 text-indigo-600" />
+                <span class="text-center text-[9px] leading-tight text-gray-600 lg:text-[10px]">{{ icon.name }}</span>
               </div>
             </div>
           </div>
 
           <!-- 字体演示 -->
-          <div class="bg-white rounded-xl shadow-md p-3 lg:p-4">
-            <h2 class="text-base lg:text-lg font-semibold text-gray-700 mb-2 lg:mb-3 flex items-center gap-2">
+          <div class="rounded-xl bg-white p-3 shadow-md lg:p-4">
+            <h2 class="mb-2 flex items-center gap-2 text-base font-semibold text-gray-700 lg:mb-3 lg:text-lg">
               <n-icon :component="Icons.TextFields" :size="20" />
               字体演示
             </h2>
             <div class="space-y-2 lg:space-y-3">
-              <div class="p-2 bg-gray-50 rounded-lg">
-                <p class="text-[10px] lg:text-xs text-gray-600 mb-1">等宽字体 (FiraCode):</p>
+              <div class="rounded-lg bg-gray-50 p-2">
+                <p class="mb-1 text-[10px] text-gray-600 lg:text-xs">等宽字体 (FiraCode):</p>
                 <p class="font-mono text-[10px] lg:text-xs">
                   const code = "Hello World";
                   <br />
                   0123456789 ABCDEF
                 </p>
               </div>
-              <div class="p-2 bg-gray-50 rounded-lg">
-                <p class="text-[10px] lg:text-xs text-gray-600 mb-1">无衬线字体 (Lato):</p>
+              <div class="rounded-lg bg-gray-50 p-2">
+                <p class="mb-1 text-[10px] text-gray-600 lg:text-xs">无衬线字体 (Lato):</p>
                 <p class="font-sans text-[10px] lg:text-xs">
                   Hello World! 0123456789
                   <br />
@@ -641,7 +641,7 @@ const handleConfirmDialog = () => {
     },
     () => {
       showInfo("已取消操作");
-    }
+    },
   );
 };
 
@@ -724,6 +724,14 @@ onUnmounted(() => {
 }
 
 .font-sans {
-  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    "Lato",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
 }
 </style>

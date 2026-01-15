@@ -39,7 +39,63 @@
      ```
    - 执行 `pnpm run dev` 验证 Tailwind 是否生效。
 
-5. 封装运行时基础能力：
+5. 配置代码质量工具（Husky + Lint-staged）：
+
+   **作用说明：**
+   - **Husky**: Git hooks 管理工具，在 `git commit` 等操作时自动触发脚本
+   - **Lint-staged**: 只对 Git 暂存区的文件运行检查，提高效率
+   - **Pre-commit Hook**: 提交前自动格式化代码，确保代码风格一致
+
+   **安装步骤：**
+
+   ```bash
+   # 安装依赖
+   pnpm add -D husky lint-staged
+
+   # 初始化 husky（会创建 .husky 目录和 pre-commit 文件）
+   npx husky init
+   ```
+
+   **配置 package.json：**
+
+   ```json
+   {
+     "lint-staged": {
+       "*": "oxfmt --no-error-on-unmatched-pattern"
+     }
+   }
+   ```
+
+   **配置 .husky/pre-commit：**
+
+   ```bash
+   npx lint-staged
+   ```
+
+   **工作流程：**
+
+   ```
+   git add src/App.vue src/main.ts
+   git commit -m "feat: 新功能"
+       ↓
+   Husky 拦截 commit 命令
+       ↓
+   执行 pre-commit hook
+       ↓
+   Lint-staged 获取暂存文件（只有 App.vue 和 main.ts）
+       ↓
+   对这两个文件运行 oxfmt 格式化
+       ↓
+   格式化成功 → 提交完成
+   格式化失败 → 提交中止
+   ```
+
+   **实际效果：**
+   - 只检查你修改的文件，不会扫描整个项目
+   - 自动修复格式问题，无需手动干预
+   - 防止不符合规范的代码进入版本库
+
+6. 封装运行时基础能力：
    - 在 `src/core/context.ts` 中提供全局 `context`，向外暴露 `notify`、弹窗控制以及 `message` 等接口，所有组件直接引入并调用。
    - 在 `main.ts` 对 Vue 实例注入统一错误处理（监听 `app.config.errorHandler` 和 `window.onerror`），确保日志归集。
    - 重构 `console.log` 等日志方法，二次封装后统一输出格式与上报逻辑，并在调试/生产自动区分开关。

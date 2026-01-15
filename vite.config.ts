@@ -5,6 +5,8 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  // 使用相对路径，支持直接打开 dist/index.html（file:// 协议）
+  base: "./",
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {

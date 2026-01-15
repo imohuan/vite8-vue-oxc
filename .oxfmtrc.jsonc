@@ -75,6 +75,35 @@
   // }
 
   // ========== 忽略模式 ==========
-  "ignorePatterns": null // 忽略匹配这些 glob 模式的文件。使用当前工作目录作为根目录。可选值: string[] | null
+  "ignorePatterns": null, // 忽略匹配这些 glob 模式的文件。使用当前工作目录作为根目录。可选值: string[] | null
   // 示例: ["**/*.min.js", "**/vendor/**", "**/*.bundle.js"]
+
+  // ========== Tailwind CSS 类名排序（实验性功能） ==========
+  "experimentalTailwindcss": {
+    // 启用后，Oxfmt 会使用与 prettier-plugin-tailwindcss 相同的算法对 Tailwind CSS 类名进行排序
+    // 参考: https://github.com/tailwindlabs/prettier-plugin-tailwindcss
+
+    "stylesheet": "./src/style.css", // Tailwind CSS v4 样式表路径（相对于此配置文件）
+    // 注意: v4 使用 stylesheet，v3 使用 config
+
+    "attributes": ["class", "className"], // 包含 Tailwind CSS 类名的属性列表
+    // 默认值: ["class", "className"]
+    // 示例: ["myClassProp", ":class"] 可以添加自定义属性
+    // 注意: 暂不支持正则表达式模式
+
+    "functions": [], // 包含 Tailwind CSS 类名的自定义函数名列表
+    // 默认值: []
+    // 示例: ["clsx", "cn", "cva", "tw"] 用于 clsx(...)、cn(...) 等工具函数
+    // 注意: 暂不支持正则表达式模式
+
+    "preserveDuplicates": false, // 保留重复的类名
+    // 默认值: false
+    // true: 保留重复的类名，例如 "p-4 p-4" 保持不变
+    // false: 移除重复的类名，例如 "p-4 p-4" 变为 "p-4"
+
+    "preserveWhitespace": false, // 保留类名周围的空白
+    // 默认值: false
+    // true: 保留类名之间的多余空格
+    // false: 规范化空格，只保留单个空格
+  },
 }
