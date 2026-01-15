@@ -65,7 +65,23 @@ src/
 
 ## Tailwind CSS v4
 
-`<style scoped>` 中使用 `@apply` 必须添加：
+样式直接写在元素属性上，避免使用 `<style scoped>` 标签：
+
+```vue
+<!-- ✅ 推荐 -->
+<div class="flex items-center gap-2 bg-white p-4">
+  <span class="text-sm text-gray-600">内容</span>
+</div>
+
+<!-- ❌ 避免 -->
+<style scoped>
+.container {
+  @apply flex items-center;
+}
+</style>
+```
+
+如必须使用 `<style scoped>` 中的 `@apply`，需添加：
 
 ```vue
 <style scoped>

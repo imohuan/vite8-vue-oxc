@@ -182,9 +182,50 @@ emitter.off("document:added", handler);
 
 ## 样式规范
 
-- 优先使用 Tailwind 类
-- `<style scoped>` 中使用 `@apply` 必须添加 `@reference "@/style.css";`
+- 优先使用 Tailwind 类，直接写在元素属性上
+- 避免使用 `<style scoped>` 标签，保持组件简洁
+- 如必须使用 `<style scoped>` 中的 `@apply`，需添加 `@reference "@/style.css";`
 - 图标使用 `@vicons/material`，大小用 `size-*` 或 `w-* h-*`
+
+### 样式写法示例
+
+```vue
+<!-- ✅ 推荐：直接写在元素上 -->
+<div class="flex items-center gap-2 rounded-lg bg-white p-4">
+  <span class="text-sm text-gray-600">内容</span>
+</div>
+
+<!-- ❌ 避免：使用 style 标签 -->
+<div class="container">
+  <span class="label">内容</span>
+</div>
+
+<style scoped>
+.container {
+  @apply flex items-center gap-2 rounded-lg bg-white p-4;
+}
+.label {
+  @apply text-sm text-gray-600;
+}
+</style>
+```
+
+### 动态样式处理
+
+```vue
+<!-- 条件样式使用 :class 绑定 -->
+<button
+  class="rounded px-4 py-2 transition-colors"
+  :class="isActive ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700'"
+>
+  按钮
+</button>
+
+<!-- 复杂的 grid 布局可用 style 属性 -->
+<div class="grid gap-2 p-4" style="grid-template-columns: repeat(auto-fill, minmax(120px, 1fr))">
+  <!-- 内容 -->
+</div>
+```
 
 ## 代码质量
 
