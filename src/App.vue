@@ -25,6 +25,7 @@ import {
 import { initContext } from "./core/context";
 
 // 内部组件：用于在 Provider 内部初始化 context
+// 这个组件确保 context 在所有 Provider 内部正确初始化
 const ContextInitializer = {
   setup() {
     // 在 Provider 内部调用，此时 composables 可以正常工作
@@ -33,4 +34,3 @@ const ContextInitializer = {
   },
 };
 </script>
-

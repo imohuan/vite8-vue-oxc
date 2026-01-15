@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import "./style.css";
-// 引入 vfonts 字体
+// 引入 vfonts 字体库
 import "vfonts/Lato.css";
 import "vfonts/FiraCode.css";
 
