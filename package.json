@@ -7,6 +7,9 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
+    "build:assets": "bun tools/generate-public-assets.mjs",
+    "build:exe": "bun run build:assets && bun build --compile --minify --windows-icon=./public/icon.ico ./src/servers/index.ts --outfile ./sub2api-ui.exe",
+    "build:release": "bun run build:assets && bun build --target=bun --minify ./src/servers/index.ts --outdir ./release",
     "lint:desc": "------- 快速 Linting: 检查 src 目录",
     "lint": "oxlint src",
     "format:desc": "------- 格式化: 修复 src 目录中的格式问题",
@@ -15,17 +18,32 @@
     "lint:format": "oxlint src && oxfmt src",
     "ci:desc": "------- 完整 CI 流程",
     "ci": "npm run lint:format && npm run build",
+    "pm2:start": "bunx pm2 start ecosystem.config.cjs",
+    "pm2:stop": "bunx pm2 stop ecosystem.config.cjs",
+    "pm2:restart": "bunx pm2 restart ecosystem.config.cjs",
+    "pm2:delete": "bunx pm2 delete ecosystem.config.cjs",
+    "pm2:logs": "bunx pm2 logs",
+    "pm2:status": "bunx pm2 status",
+    "pm2:monit": "bunx pm2 monit",
+    "pm2:save": "bunx pm2 save",
+    "pm2:start:api": "bunx pm2 start ecosystem.config.cjs --only sub2api-api",
+    "pm2:start:ui": "bunx pm2 start ecosystem.config.cjs --only sub2api-ui",
+    "pm2:stop:api": "bunx pm2 stop sub2api-api",
+    "pm2:stop:ui": "bunx pm2 stop sub2api-ui",
     "prepare": "husky"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
+    "@types/bun": "^1.3.14",
     "@vicons/material": "^0.13.0",
     "@vueuse/core": "^14.1.0",
+    "elysia": "^1.4.28",
     "lodash-es": "^4.17.22",
     "mitt": "^3.0.1",
     "oxfmt": "^0.24.0",
     "oxlint": "^1.39.0",
     "pinia": "^3.0.4",
+    "pm2": "^7.0.1",
     "prettier": "^3.8.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
@@ -37,17 +55,16 @@
     "@types/node": "^24.10.8",
     "@vitejs/plugin-vue": "^6.0.3",
     "@vue/tsconfig": "^0.8.1",
+    "bun-types": "^1.3.14",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "vite": "8.0.0-beta.0",
     "vue-tsc": "^3.2.2"
   },
+  "overrides": {
+    "vite": "8.0.0-beta.0"
+  },
   "lint-staged": {
     "*": "oxfmt --no-error-on-unmatched-pattern"
-  },
-  "pnpm": {
-    "overrides": {
-      "vite": "8.0.0-beta.0"
-    }
   }
 }
