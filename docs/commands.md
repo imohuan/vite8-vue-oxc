@@ -21,6 +21,15 @@ pnpm format           # 代码格式化
 pnpm lint:format      # 检查 + 格式化
 ```
 
+## UI Server（Bun）
+
+```bash
+bun run server        # 启动 UI 静态服务 http://localhost:3002
+bun run test:api      # API 联调脚本（需先启动 server）
+```
+
+`test:api` 可选参数：`--base <url>`、`--only health,throw`、`--slow-ms 500`
+
 ## 测试
 
 ```bash

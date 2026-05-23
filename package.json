@@ -10,6 +10,8 @@
     "build:assets": "bun tools/generate-public-assets.mjs",
     "build:exe": "bun run build:assets && bun build --compile --minify --windows-icon=./public/icon.ico ./src/servers/index.ts --outfile ./vite8-vue-oxc-ui.exe",
     "build:release": "bun run build:assets && bun build --target=bun --minify ./src/servers/index.ts --outdir ./release",
+    "server": "bun run --bun ./src/servers/index.ts",
+    "test:api": "bun run --bun ./scripts/test-api.ts",
     "lint:desc": "------- 快速 Linting: 检查 src 目录",
     "lint": "oxlint src",
     "format:desc": "------- 格式化: 修复 src 目录中的格式问题",
